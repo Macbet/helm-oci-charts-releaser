@@ -18,7 +18,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DEFAULT_HELM_VERSION=v3.13.2
+DEFAULT_HELM_VERSION=v3.18.6
 ARCH=$(uname)
 ARCH="${ARCH,,}-amd64" # Official helm is available only for x86_64
 
@@ -394,7 +394,7 @@ helm_login() {
   # Get the cleared host url
   oci_registry="${oci_registry#oci://}"
   oci_host="${oci_registry%%/*}"
-  echo "$OCI_PASSWORD" | dry_run helm registry login -u "${oci_username}" --password-stdin "${oci_host}"
+  echo "$OCI_PASSWORD" | dry_run helm registry login ${oci_host} -u ${oci_username} --password-stdin 
 }
 
 main "$@"
